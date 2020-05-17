@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.example.weibo"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    //默认的1.0.0webview无法使用，所有1.1.0-bete01
+    configurations.all {
+        resolutionStrategy.force 'androidx.appcompat:appcompat:1.1.0-beta01'
+    }
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //dex拆分65536
+    implementation 'com.android.support:multidex:1.0.1'
+
+    //RecyclerView列表
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+    //ButterKnife依赖
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+
+    //material
+    implementation 'com.google.android.material:material:1.0.0'
+
+    //Retrofit + RxJava的依赖
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    // 必要依赖，解析json字符所用
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    // 必要依赖，和Rxjava结合必须用到，下面会提到
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    // 必要rxjava2依赖
+    implementation "io.reactivex.rxjava2:rxjava:2.1.3"
+    // 必要rxandrroid依赖，切线程时需要用到
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
+    //OkHttp的依赖
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    //Gson依赖
+    implementation 'com.google.code.gson:gson:2.2.4'
+
+    //glide图片加载库
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    //图片选择器
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.6'
+
+    //PhotoView图片预览
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    //SmartRefreshLayout 组件
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'  //1.0.5及以前版本的老用户升级需谨慎，API改动过大
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.2'  //没有使用特殊Header，可以不加这行
+
+    //友盟的依赖包
+    implementation 'com.umeng.umsdk:analytics:8.0.0'
+    implementation 'com.umeng.umsdk:common:2.0.0'
+}
